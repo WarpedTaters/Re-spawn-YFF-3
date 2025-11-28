@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title class="heading">Respawn Booking</title>
+  <link rel="stylesheet" href="/static/kjøp.css">
+</head>
+<body>
+    <nav>
+  <ul>
+    <li>
+      <form method="POST" action="/button">
+        <button type="submit" name="home" value="pressed" class="b">Hjemmeside</button>
+      </form>
+    </li>
+        <li>
+      <form method="POST" action="/button">
+        <button type="submit" name="button" value="pressed" class="b">Bestill nå!</button>       </form>
+    </li>
+        <li>
+      <form method="POST" action="/button">
+        <button type="submit" name="seats" value="pressed">Sjekk din info her</button>     </form>
+    </li>
+  </ul>
+</nav>
+
+  <div><form action="/submit_form" method="POST" id="a"> 
+
+            <h2> VELG DAGSPASSTYPE HER</h2>
+            <h3><label for="saturpass" >Lørdagspass</label>
+            <input type="radio" id="saturpass" name="passes" value="Lørdagspass" required>
+            <br>
+            <label for="sunpass" >Søndagspass</label>
+            <input type="radio" id="sunpasspass" name="passes" value="Søndagspass">
+            <br>
+            <label for="weekpass" >Weekend pass</label>
+            <input type="radio" id="weekpass" name="passes" value="Weekend pass">
+            <br></h3>
+
+            <h4> Fyll Inn din kontakt info her: </h4>
+            <label for="name">Navn:</label> <br>
+            <input type="text" id="name" name="name" required><br> <br>
+
+            <label for="pnumber">Ditt telefonnummer:</label> <br>
+            <input type="tel" id="pnumber" name="pnumber" placeholder="+47 188 81 981" required> <br> <br>
+
+            <label for="mail">Din email:</label> <br>
+            <input type="mail" id="mail" name="mail" placeholder="abc@abcmail.com" required> <br> <br>
+
+            <label for="address">Din adresse:</label> <br>
+            <input type="text" id="address" name="address" size="25" placeholder="Storgata 15 A, 0161 Oslo, Norway" required> <br> <br>
+
+            <input type="submit" id="submity" value="Meld På!">
+      </form>
+</div>
+    <div class="seat-grid">
+      <div class ="seat" data-name="1">1</div>
+      <div class ="seat" data-name="2">2</div>
+      <div class ="seat" data-name="3">3</div>
+      <div class ="seat" data-name="4">4</div>
+      <div class ="seat" data-name="5">5</div>
+      <div class ="seat" data-name="6">6</div>
+      <div class ="seat" data-name="7">7</div>
+      <div class ="seat" data-name="8">8</div>
+      <div class ="seat" data-name="9">9</div>
+      <div class ="seat" data-name="10">10</div>
+      <div class ="seat" data-name="11">11</div>
+      <div class ="seat" data-name="12">12</div>
+      <div class ="seat" data-name="13">13</div>
+      <div class ="seat" data-name="14">14</div>
+      <div class ="seat" data-name="15">15</div>
+      <div class ="seat" data-name="16">16</div>
+      <div class ="seat" data-name="17">17</div>
+      <div class ="seat" data-name="18">18</div>
+      <div class ="seat" data-name="19">19</div>
+      <div class ="seat" data-name="20">20</div>
+      <div class ="seat" data-name="21">21</div>
+      <div class ="seat" data-name="22">22</div>
+      <div class ="seat" data-name="23">23</div>
+      <div class ="seat" data-name="24">24</div>
+    </div>
+
+        <script> //all javascripten var KI
+        document.querySelectorAll(".seat").forEach(el => {
+            el.addEventListener("click", () => {
+                
+                if (el.classList.contains("clicked")) {
+                  el.classList.remove("clicked"); 
+                  fetch("/unsave", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ seat: el.dataset.name })
+                })
+                .then(res => res.json())
+                .then(data => console.log("Saved:", data)); }
+                else {
+                  el.classList.add("clicked");  
+                fetch("/save", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ seat: el.dataset.name })
+                })
+                .then(res => res.json())
+                .then(data => console.log("Saved:", data));   }
+                
+                
+            });
+        });
+    </script>
+<script> // dette er altså også KI-generert
+window.onload = function () {
+    fetch('/get_seats', { method: 'POST' })
+        .then(response => response.json())
+        .then(seats => {
+            seats.forEach(seatNum => {
+                const seatEl = document.querySelector(`.seat[data-name='${seatNum}']`);
+                if (seatEl) {
+                    seatEl.classList.add("reserved"); 
+                }
+            });
+        });
+};
+</script>
+  
+</body>
+</html>

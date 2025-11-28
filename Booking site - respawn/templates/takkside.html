@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title class="heading">Respawn Booking</title>
+  <link rel="stylesheet" href="../static/styles2.css">
+  <style>
+    html{
+    background-color: rgb(12, 12, 12);
+    color: white;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+  <nav>
+  <ul>
+    <li>
+      <form method="POST" action="/button">
+        <button type="submit" name="home" value="pressed">Hjemmeside</button>
+      </form>
+    </li>
+        <li>
+      <form method="POST" action="/button">
+        <button type="submit" name="button" value="pressed">Bestill nå!</button>       </form>
+    </li>
+        <li>
+          <form method="POST" action="/button">
+      <button type="submit" name="seats" value="pressed">Sjekk din info her</button>      </form>
+    </li>
+  </ul>
+</nav>
+  <header>
+
+      <div class="takk">
+        Takk for at du registreres med oss, {{username}}! Du har fått Ordrenummer: {{order}} med {{pas}}.
+     </div>
+
+    
+    <footer>
+ 
+    </footer>
+  </body>
+  </html>
+  
