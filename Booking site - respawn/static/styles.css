@@ -45,10 +45,9 @@ body {
     
     font-family: Arial;
     background-image:url('Background.jpg');
-    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment:fixed;
+
 
 
 }
@@ -72,11 +71,11 @@ body {
     align-items: center;
     background-color: #00aeef;
     padding: 20px;
-    position: fixed;
+    position:absolute;
     width: 48%;
     border-radius: 25px;
     margin: 3%;
-    top:60%;
+    top:10rem;
 
     
 }

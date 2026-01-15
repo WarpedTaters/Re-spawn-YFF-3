@@ -14,7 +14,7 @@ def button():
     if request.method == 'POST':
         button_value = request.form.get('button')
         if button_value == 'pressed':
-            with open("Bookinglogs.txt", "r+") as file: #AI assisted, i was confused dont know everything about file handling
+            with open("Bookinglogs.txt", "r+") as file: 
                 lines = file.readlines()  
 
                 file.seek(0) 
